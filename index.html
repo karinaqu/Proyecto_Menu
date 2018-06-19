@@ -14,7 +14,7 @@
   $(document).ready(function() {
     $('li').click(function() {
       // the clicked LI
-      var clicked = $(this);
+      var clicked = $(this).css("background-color","#00FFFF");
 
       // all the LIs above the clicked one
       var previousAll = clicked.prevAll();
@@ -22,7 +22,7 @@
       // only proceed if it's not already on top (no previous siblings)
       if(previousAll.length > 0) {
         // top LI
-        var top = $(previousAll[previousAll.length - 1]);
+        var top = $(previousAll[previousAll.length - 1]).css("background-color","#F7F9F9");
 
         // immediately previous LI
         var previous = $(previousAll[0]);
@@ -55,7 +55,7 @@
       <a class="navbar-brand" href="#">Menu</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Menu 1</a></li>
+      <li><a href="#">Menu 1</a></li>
       <li><a href="#">Menu 2</a></li>
       <li><a href="#">Menu 3</a></li>
       <li><a href="#">Menu 4</a></li>
