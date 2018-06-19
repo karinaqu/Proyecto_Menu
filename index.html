@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<title>Menu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('li').click(function() {
+      // the clicked LI
+      var clicked = $(this);
+
+      // all the LIs above the clicked one
+      var previousAll = clicked.prevAll();
+
+      // only proceed if it's not already on top (no previous siblings)
+      if(previousAll.length > 0) {
+        // top LI
+        var top = $(previousAll[previousAll.length - 1]);
+
+        // immediately previous LI
+        var previous = $(previousAll[0]);
+
+        // how far up do we need to move the clicked LI?
+        var moveUp = clicked.attr('offsetTop') - top.attr('offsetTop');
+
+        // how far down do we need to move the previous siblings?
+        var moveDown = (clicked.offset().top + clicked.outerHeight()) - (previous.offset().top + previous.outerHeight());
+
+        // let's move stuff
+        clicked.css('position', 'relative');
+        previousAll.css('position', 'relative');
+        clicked.animate({'top': -moveUp});
+        previousAll.animate({'top': moveDown}, {complete: function() {
+          // rearrange the DOM and restore positioning when we're done moving
+          clicked.parent().prepend(clicked);	
+          clicked.css({'position': 'static', 'top': 0});
+          previousAll.css({'position': 'static', 'top': 0}); 
+        }});
+      }
+    });
+  });
+</script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Menu</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Menu 1</a></li>
+      <li><a href="#">Menu 2</a></li>
+      <li><a href="#">Menu 3</a></li>
+      <li><a href="#">Menu 4</a></li>
+	  <li><a href="#">Menu 5</a></li>
+	  <li><a href="#">Menu 6</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+</body>
+</html>
